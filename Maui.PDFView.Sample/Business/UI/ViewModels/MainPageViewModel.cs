@@ -18,24 +18,28 @@ namespace Example.Business.UI.ViewModels
         [ObservableProperty] private uint _pageIndex = 0;
         [ObservableProperty] private uint _maxPageIndex = uint.MaxValue;
 
-        [RelayCommand] private void Appearing()
-        { 
+        [RelayCommand]
+        private void Appearing()
+        {
             ChangeUri();
         }
 
-        [RelayCommand] private void ChangeUri()
+        [RelayCommand]
+        private void ChangeUri()
         {
             PdfSource = _repository.GetPdfSource();
         }
 
-        [RelayCommand] private void PageChanged(PageChangedEventArgs args)
+        [RelayCommand]
+        private void PageChanged(PageChangedEventArgs args)
         {
             MaxPageIndex = (uint)args.TotalPages - 1;
             PagePosition = $"{args.CurrentPage} of {args.TotalPages}";
             Debug.WriteLine($"Current page: {args.CurrentPage} of {args.TotalPages}");
         }
-        
-        [RelayCommand] private async Task UploadUri()
+
+        [RelayCommand]
+        private async Task UploadUri()
         {
             // You can use the IPdfSource interface to load a PDF file from various sources such as assets, HTTP, file system, etc.,
             // using the built-in implementations: AssetPdfSource, FilePdfSource, ByteArrayPdfDataSource and HttpPdfSource.
@@ -51,8 +55,9 @@ namespace Example.Business.UI.ViewModels
 
             PdfSource = await source.GetFilePathAsync();
         }
-        
-        [RelayCommand] private async Task NullUri()
+
+        [RelayCommand]
+        private async Task NullUri()
         {
             //  Reset PdfView
             PdfSource = null;
