@@ -4,7 +4,9 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
+using System.Diagnostics;
 using System.Numerics;
+using System.Text;
 using Windows.Data.Pdf;
 using Windows.Storage;
 using Windows.Storage.Streams;
@@ -27,7 +29,7 @@ namespace Maui.PDFView.Platforms.Windows
         private string? _fileName;
 
         private PageAppearance _pageAppearance = new PageAppearance();
-        
+
         private bool _isScrolling;
         private bool _isPageIndexLocked;
 
@@ -44,7 +46,7 @@ namespace Maui.PDFView.Platforms.Windows
         static void MapIsHorizontal(PdfViewHandler handler, IPdfView pdfView)
         {
             handler._stack.Orientation = pdfView.IsHorizontal
-                ? Orientation.Horizontal 
+                ? Orientation.Horizontal
                 : Orientation.Vertical;
         }
 
@@ -97,6 +99,8 @@ namespace Maui.PDFView.Platforms.Windows
 
             for (uint i = 0; i < pdfDoc.PageCount; i++)
             {
+                Debug.WriteLine($"PdfViewHandler.RenderPages {_fileName} {i}");
+
                 var page = pdfDoc.GetPage(i);
                 var bundle = _pageAppearance?.Crop ?? new Microsoft.Maui.Thickness();
 
@@ -163,7 +167,7 @@ namespace Maui.PDFView.Platforms.Windows
             target.Translation += new Vector3(0, 0, ZDepth);
         }
 
-       
+
 
         private void GotoPage(uint pageIndex)
         {
@@ -182,7 +186,7 @@ namespace Maui.PDFView.Platforms.Windows
 
                 _isPageIndexLocked = true;
                 if (_stack.Orientation == Orientation.Vertical)
-                    _scrollViewer.ScrollToVerticalOffset(_scrollViewer.ZoomFactor*child.ActualOffset.Y);
+                    _scrollViewer.ScrollToVerticalOffset(_scrollViewer.ZoomFactor * child.ActualOffset.Y);
                 else
                     _scrollViewer.ScrollToHorizontalOffset(_scrollViewer.ZoomFactor * child.ActualOffset.X);
             }
@@ -225,7 +229,7 @@ namespace Maui.PDFView.Platforms.Windows
                         }
                     }
                 }
-            
+
             }
 
             var newPageIndex = (uint)currentPage;

@@ -1,3 +1,8 @@
+
+Forked from https://github.com/vitalii-vov/Maui.PDFView
+Doc https://medium.com/@vitaliivovchok/display-pdf-in-the-maui-application-on-android-and-ios-544cba1d9daa
+
+
 # Maui.PDFView
 Library for display PDF files in .NET MAUI on Android, iOS, MacOS and Windows
 

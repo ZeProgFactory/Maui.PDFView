@@ -51,7 +51,9 @@ namespace Example.Business.UI.ViewModels
             //source = new ByteArrayPdfDataSource(await File.ReadAllBytesAsync(_repository.GetPdfSource()));
 
             //download timeout on Windows ??? source = new HttpPdfSource("https://www.adobe.com/support/products/enterprise/knowledgecenter/media/c4611_sample_explain.pdf");
-            source = new HttpPdfSource("https://sample-files.com/downloads/documents/pdf/image-doc.pdf");
+            //source = new HttpPdfSource("https://sample-files.com/downloads/documents/pdf/image-doc.pdf");
+
+            source = new FilePdfSource(@"E:\OneDrive - ZPF\_Docs_\Digital_Fernsehen_5.22_de.downmagaz.net.pdf");
 
             PdfSource = await source.GetFilePathAsync();
         }
