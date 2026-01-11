@@ -7,6 +7,7 @@ public class PdfTempFileHelper
     /// </summary>
     public static string CreateTempPdfFilePath()
     {
+        //ToDo: place temp files in subfolder in order to be able to dlete previously created temp files on changed PDFFile
         return Path.Combine(Path.GetTempPath(), Path.GetRandomFileName() + ".pdf");
     }
 }

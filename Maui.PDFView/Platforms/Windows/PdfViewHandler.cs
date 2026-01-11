@@ -97,6 +97,8 @@ namespace Maui.PDFView.Platforms.Windows
             var storageFile = await StorageFile.GetFileFromPathAsync(_fileName);
             PdfDocument pdfDoc = await PdfDocument.LoadFromFileAsync(storageFile);
 
+            //ToDo: add possibility to cancel rendering
+
             for (uint i = 0; i < pdfDoc.PageCount; i++)
             {
                 Debug.WriteLine($"PdfViewHandler.RenderPages {_fileName} {i}");

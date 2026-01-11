@@ -7,7 +7,7 @@ namespace Maui.PDFView.Events
             CurrentPage = currentPage;
             TotalPages = totalPages;
         }
-       
+
         public int CurrentPage { get; }
         public int TotalPages { get; }
     }
