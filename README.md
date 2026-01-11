@@ -1,5 +1,5 @@
 
-Forked from https://github.com/vitalii-vov/Maui.PDFView
+Forked from https://github.com/vitalii-vov/Maui.PDFView   
 Doc https://medium.com/@vitaliivovchok/display-pdf-in-the-maui-application-on-android-and-ios-544cba1d9daa
 
 
@@ -7,11 +7,11 @@ Doc https://medium.com/@vitaliivovchok/display-pdf-in-the-maui-application-on-an
 Library for display PDF files in .NET MAUI on Android, iOS, MacOS and Windows
 
 ![NuGet Downloads](https://img.shields.io/nuget/dt/Vitvov.Maui.PDFView?style=for-the-badge)
-![GitHub License](https://img.shields.io/github/license/vitalii-vov/Maui.PDFView?style=for-the-badge)
-![last commit](https://img.shields.io/github/last-commit/vitalii-vov/Maui.PDFView?style=for-the-badge)
+![GitHub License](https://img.shields.io/github/license/ZeProgFactory/Maui.PDFView?style=for-the-badge)
+![last commit](https://img.shields.io/github/last-commit/ZeProgFactory/Maui.PDFView?style=for-the-badge)
 
-| .NET MAUI | .NET 8   | .NET 9   |
-| :-------- | :------- | :------- |
+| .NET MAUI | .NET 10   | 
+| :-------- | :-------  | 
 
 | Platform  | Android | iOS | MacOS | Windows |
 | :-------- | :-----  | :-- | :---- | :------ |
