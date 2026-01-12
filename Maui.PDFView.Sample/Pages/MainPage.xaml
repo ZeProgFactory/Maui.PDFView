@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+   xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+   xmlns:pdf="clr-namespace:Maui.PDFView;assembly=Maui.PDFView"
+   x:Class="Maui.PDFView.Sample.Pages.MainPage"
+   Title="">
+
+   <Grid ColumnDefinitions="auto,*,auto" Margin="5">
+
+      <VerticalStackLayout Grid.Column="0" Margin="5" BackgroundColor="LightGray" Padding="5" Spacing="5">
+
+         <Button Text="LegacyHTTPLoad" Clicked="LegacyHTTPLoad_Clicked" />
+         <Button Text="HTTPLoad" Clicked="HTTPLoad_Clicked" />
+
+      </VerticalStackLayout>
+ 
+      <!--<pdf:PdfView x:Name="pdfView" Grid.Column="1" Margin="5"
+            Background="Beige"
+            IsHorizontal="{Binding IsHorizontal}"
+            MaxZoom="{Binding MaxZoom}"
+            PageChangedCommand="{Binding PageChangedCommand}"
+            Uri="{Binding PdfSource}"
+            PageIndex="{Binding PageIndex, Mode=TwoWay}" />-->
+
+      <pdf:PdfView x:Name="pdfView" Grid.Column="1" Margin="5"
+            Background="Beige" />      
+      
+   </Grid>
+
+</ContentPage>

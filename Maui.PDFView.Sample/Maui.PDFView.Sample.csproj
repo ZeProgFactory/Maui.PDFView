@@ -73,10 +73,5 @@
 	  <ProjectReference Include="..\Maui.PDFView\Maui.PDFView.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <MauiXaml Update="Business\UI\Pages\MainPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	</ItemGroup>
 
 </Project>

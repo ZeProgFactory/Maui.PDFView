@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.3.11312.210 d18.3
+VisualStudioVersion = 18.3.11312.210
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maui.PDFView", "Maui.PDFView\Maui.PDFView.csproj", "{007FCEF4-E04D-40D2-904D-41EC1CD4DC61}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example", "Example\Example.csproj", "{DC1C1A61-EC75-4B1A-9B5B-369719FE2B90}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maui.PDFView.Sample", "Maui.PDFView.Sample\Maui.PDFView.Sample.csproj", "{B5263588-5FF2-44C1-B1B1-1A36642C3F99}"
 EndProject
@@ -19,12 +17,6 @@ Global
 		{007FCEF4-E04D-40D2-904D-41EC1CD4DC61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{007FCEF4-E04D-40D2-904D-41EC1CD4DC61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{007FCEF4-E04D-40D2-904D-41EC1CD4DC61}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DC1C1A61-EC75-4B1A-9B5B-369719FE2B90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DC1C1A61-EC75-4B1A-9B5B-369719FE2B90}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DC1C1A61-EC75-4B1A-9B5B-369719FE2B90}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{DC1C1A61-EC75-4B1A-9B5B-369719FE2B90}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DC1C1A61-EC75-4B1A-9B5B-369719FE2B90}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DC1C1A61-EC75-4B1A-9B5B-369719FE2B90}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{B5263588-5FF2-44C1-B1B1-1A36642C3F99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B5263588-5FF2-44C1-B1B1-1A36642C3F99}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5263588-5FF2-44C1-B1B1-1A36642C3F99}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
