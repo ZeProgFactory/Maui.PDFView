@@ -35,8 +35,6 @@ partial class PdfView
       {
          _PdfDocument = null;
          _PDFInfos = new PDFInfos();
-
-         Uri = string.Empty;
       }
    }
 

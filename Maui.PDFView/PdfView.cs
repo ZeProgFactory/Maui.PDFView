@@ -5,12 +5,6 @@ namespace Maui.PDFView;
 
 public partial class PdfView : View, IPdfView
 {
-   public static readonly BindableProperty UriProperty = BindableProperty.Create(
-           propertyName: nameof(Uri),
-           returnType: typeof(string),
-           declaringType: typeof(PdfView),
-           defaultValue: default(string));
-
    public static readonly BindableProperty IsHorizontalProperty = BindableProperty.Create(
            propertyName: nameof(IsHorizontal),
            returnType: typeof(bool),
@@ -42,18 +36,6 @@ public partial class PdfView : View, IPdfView
            declaringType: typeof(PdfView),
            defaultValue: (uint)0, defaultBindingMode: BindingMode.TwoWay);
 
-   public string Uri
-   {
-      get => (string)GetValue(UriProperty);
-      set
-      {
-         if (Uri != value)
-         {
-            SetValue(UriProperty, value);
-            _PDFInfos.FileName = value;
-         }
-      }
-   }
 
    public bool IsHorizontal
    {

@@ -1,12 +1,11 @@
-﻿using Maui.PDFView.Events;
+﻿using System.Diagnostics;
+using System.Numerics;
+using Maui.PDFView.Events;
 using Microsoft.Maui.Handlers;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
-using System.Diagnostics;
-using System.Numerics;
-using System.Text;
 using Windows.Data.Pdf;
 using Windows.Storage;
 using Windows.Storage.Streams;
@@ -17,7 +16,6 @@ namespace Maui.PDFView.Platforms.Windows
    {
       public static readonly PropertyMapper<PdfView, PdfViewHandler> PropertyMapper = new(ViewMapper)
       {
-         [nameof(IPdfView.Uri)] = MapUri,
          [nameof(IPdfView.IsHorizontal)] = MapIsHorizontal,
          [nameof(IPdfView.MaxZoom)] = MapMaxZoom,
          [nameof(IPdfView.PageAppearance)] = MapPageAppearance,
@@ -37,11 +35,6 @@ namespace Maui.PDFView.Platforms.Windows
       {
       }
 
-      static async void MapUri(PdfViewHandler handler, IPdfView pdfView)
-      {
-         handler._fileName = pdfView.Uri;
-         await handler.RenderPages();
-      }
 
       static void MapIsHorizontal(PdfViewHandler handler, IPdfView pdfView)
       {
@@ -145,6 +138,7 @@ namespace Maui.PDFView.Platforms.Windows
             HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Center,
             VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment.Center
          };
+
          border.Children.Add(new Microsoft.UI.Xaml.Controls.Image { Source = image });
 
          if (appearance.ShadowEnabled)

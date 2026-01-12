@@ -9,13 +9,13 @@ public partial class MainPage : ContentPage
    {
       InitializeComponent();
 
-      pdfView.PropertyChanged += (s, e) =>
-      {
-         if (e.PropertyName == nameof(pdfView.Uri))
-         {
-            Title = System.IO.Path.GetFileName(pdfView.Uri);
-         }
-      };
+      //pdfView.PropertyChanged += (s, e) =>
+      //{
+      //   if (e.PropertyName == nameof(pdfView.fUri))
+      //   {
+      //      Title = System.IO.Path.GetFileName(pdfView.Uri);
+      //   }
+      //};
 
       pdfView.PropertyChanged += (s, e) =>
       {
@@ -24,18 +24,6 @@ public partial class MainPage : ContentPage
             Title = (pdfView.IsBusy ? "IsBusy" : pdfView.GetInfos().Title);
          }
       };
-   }
-
-
-   private async void LegacyHTTPLoad_Clicked(object sender, EventArgs e)
-   {
-      // Sample pdf download 10 MB
-      var url = "https://www.learningcontainer.com/wp-content/uploads/2019/09/sample-pdf-download-10-mb.pdf";
-
-      var source = new HttpPdfSource(url);
-
-      pdfView.Uri = await source.GetFilePathAsync();
-
    }
 
 
@@ -48,6 +36,7 @@ public partial class MainPage : ContentPage
 
       Load1rstPage();
    }
+
 
    private async void Load1rstPage()
    {

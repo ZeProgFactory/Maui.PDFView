@@ -10,7 +10,6 @@
 
       <VerticalStackLayout Grid.Column="0" Margin="5" BackgroundColor="LightGray" Padding="5" Spacing="5">
 
-         <Button Text="LegacyHTTPLoad" Clicked="LegacyHTTPLoad_Clicked" />
          <Button Text="HTTPLoad" Clicked="HTTPLoad_Clicked" />
          <Button Text="Resource 1" Clicked="Resx1Load_Clicked" />
          <Button Text="Resource 2" Clicked="Resx2Load_Clicked" />

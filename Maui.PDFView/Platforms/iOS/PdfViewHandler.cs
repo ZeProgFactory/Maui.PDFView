@@ -12,7 +12,6 @@ public class PdfViewHandler : ViewHandler<IPdfView, PdfKit.PdfView>
 {
     public static readonly PropertyMapper<PdfView, PdfViewHandler> PropertyMapper = new(ViewMapper)
     {
-        [nameof(IPdfView.Uri)] = MapUri,
         [nameof(IPdfView.IsHorizontal)] = MapIsHorizontal,
         [nameof(IPdfView.MaxZoom)] = MapMaxZoom,
         [nameof(IPdfView.PageAppearance)] = MapPageAppearance,
@@ -29,11 +28,6 @@ public class PdfViewHandler : ViewHandler<IPdfView, PdfKit.PdfView>
     {
     }
 
-    static void MapUri(PdfViewHandler handler, IPdfView pdfView)
-    {
-        handler._fileName = pdfView.Uri;
-        handler.RenderPages();
-    }
 
     static void MapIsHorizontal(PdfViewHandler handler, IPdfView pdfView)
     {
