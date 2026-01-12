@@ -15,6 +15,8 @@ public class PDFInfos
 
 
    public int PageCount { get; set; } = -1;
+   public int PageIndex { get; set; } = -1;
+
    public long FileSizeInBytes { get; set; } = 0;
 
 
@@ -26,4 +28,12 @@ public class PDFInfos
        }
    }
    string _Title = string.Empty;
+
+
+   /// <summary>
+   /// Gets whether the Portable Document Format (PDF) document is password-protected.
+   /// </summary>
+   public bool IsPasswordProtected { get; internal set; } = false;
+
+
 }

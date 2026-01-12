@@ -12,6 +12,10 @@
 
          <Button Text="LegacyHTTPLoad" Clicked="LegacyHTTPLoad_Clicked" />
          <Button Text="HTTPLoad" Clicked="HTTPLoad_Clicked" />
+         <Button Text="Resource 1" Clicked="Resx1Load_Clicked" />
+         <Button Text="Resource 2" Clicked="Resx2Load_Clicked" />
+         <Button Text="HTTPLoad" Clicked="HTTPLoad_Clicked" />
+         <Button Text="Unload" Clicked="Unload_Clicked" />
          <Button Text="Get Info" Clicked="GetInfo_Clicked" />
          <Button Text="Render pages" Clicked="RenderPages_Clicked" />
 
@@ -26,8 +30,10 @@
             PageIndex="{Binding PageIndex, Mode=TwoWay}" />-->
 
       <pdf:PdfView x:Name="pdfView" Grid.Column="1" Margin="5"
-            Background="Beige" />      
-      
+            Background="Beige" />
+
+
+      <Image x:Name="imageCover" Grid.Column="0" Margin="10" BackgroundColor="Gray" VerticalOptions="End"   WidthRequest="150" />
    </Grid>
 
 </ContentPage>

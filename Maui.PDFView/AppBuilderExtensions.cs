@@ -16,6 +16,7 @@
                 handlers.AddHandler(typeof(PdfView), typeof(Platforms.Windows.PdfViewHandler));
 #endif
             });
+
             return builder;
         }
     }
