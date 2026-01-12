@@ -1,29 +1,56 @@
-using System.Reflection;
+﻿using System.Reflection;
 
 namespace Maui.PDFView.DataSources;
 
 public class AssetPdfSource : IPdfSource
 {
-    private readonly string _resourcePath;
+   string _resourcePath;
 
-    public AssetPdfSource(string resourcePath)
-    {
-        _resourcePath = resourcePath;
-    }
+   public AssetPdfSource()
+   {
+      _resourcePath = string.Empty;
+   }
+   public AssetPdfSource(string resourcePath)
+   {
+      _resourcePath = resourcePath;
+   }
 
-    public async Task<string> GetFilePathAsync()
-    {
-        var assembly = Assembly.GetEntryAssembly();
-        byte[] bytes;
-        await using (Stream stream = assembly.GetManifestResourceStream(_resourcePath))
-        {
+   public string LastError { get; private set; }
+
+
+   public async Task<string> GetFilePathAsync()
+   {
+      LastError = "";
+
+      try
+      {
+         var assembly = Assembly.GetEntryAssembly();
+         byte[] bytes;
+         await using (Stream stream = assembly.GetManifestResourceStream(_resourcePath))
+         {
             bytes = new byte[stream.Length];
             stream.Read(bytes, 0, bytes.Length);
-        }
+         }
 
-        var tempFile = PdfTempFileHelper.CreateTempPdfFilePath();
-        await File.WriteAllBytesAsync(tempFile, bytes);
+         var tempFile = PdfTempFileHelper.CreateTempPdfFilePath();
+         await File.WriteAllBytesAsync(tempFile, bytes);
 
-        return tempFile;
-    }
+         return tempFile;
+      }
+      catch (Exception ex)
+      {
+         LastError = ex.ToString();
+         System.Diagnostics.Debug.WriteLine(ex.ToString());
+
+         return "";
+      }
+   }
+
+
+   public Task<string> LoadPDF(string resourcePath)
+   {
+      _resourcePath = resourcePath;
+
+      return GetFilePathAsync();
+   }
 }

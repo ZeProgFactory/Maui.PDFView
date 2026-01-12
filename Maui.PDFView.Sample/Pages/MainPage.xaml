@@ -12,6 +12,8 @@
 
          <Button Text="LegacyHTTPLoad" Clicked="LegacyHTTPLoad_Clicked" />
          <Button Text="HTTPLoad" Clicked="HTTPLoad_Clicked" />
+         <Button Text="Get Info" Clicked="GetInfo_Clicked" />
+         <Button Text="Render pages" Clicked="RenderPages_Clicked" />
 
       </VerticalStackLayout>
  
