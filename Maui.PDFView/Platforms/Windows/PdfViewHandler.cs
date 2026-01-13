@@ -24,7 +24,6 @@ public class PdfViewHandler : ViewHandler<IPdfView, ScrollViewer>
 
    private ScrollViewer _scrollViewer;
    private StackPanel _stack;
-   private string? _fileName;
 
    private PageAppearance _pageAppearance = new PageAppearance();
 
@@ -79,24 +78,25 @@ public class PdfViewHandler : ViewHandler<IPdfView, ScrollViewer>
       return _scrollViewer;
    }
 
-   async Task RenderPages()
+
+   public void ClearPages()
    {
       _stack.Children.Clear();
       _scrollViewer.ZoomToFactor(1);
+   }
 
-      if (string.IsNullOrEmpty(_fileName) || !System.IO.File.Exists(_fileName))
-         return;
 
-      var storageFile = await StorageFile.GetFileFromPathAsync(_fileName);
-      PdfDocument pdfDoc = await PdfDocument.LoadFromFileAsync(storageFile);
+   public async Task RenderPages(PdfDocument pdfDocument)
+   {
+      ClearPages();
 
       //ToDo: add possibility to cancel rendering
 
-      for (uint i = 0; i < pdfDoc.PageCount; i++)
+      for (uint i = 0; i < pdfDocument.PageCount; i++)
       {
-         Debug.WriteLine($"PdfViewHandler.RenderPages {_fileName} {i}");
+         Debug.WriteLine($"PdfViewHandler.RenderPages {i}");
 
-         var page = pdfDoc.GetPage(i);
+         var page = pdfDocument.GetPage(i);
          var bundle = _pageAppearance?.Crop ?? new Microsoft.Maui.Thickness();
 
          using (InMemoryRandomAccessStream stream = new())
@@ -242,12 +242,5 @@ public class PdfViewHandler : ViewHandler<IPdfView, ScrollViewer>
 
       if (VirtualView.PageChangedCommand?.CanExecute(null) == true)
          VirtualView.PageChangedCommand.Execute(new PageChangedEventArgs(currentPage + 1, layout.Children.Count));
-   }
-
-
-   public void RenderAllPages()
-   {
-
-
    }
 }

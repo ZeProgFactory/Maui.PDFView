@@ -12,6 +12,32 @@ partial class PdfView
 {
    PdfDocument _PdfDocument = null;
 
+   public async Task LoadPDF(string pdfPath)
+   {
+      UnloadPDF();
+
+      // Open the PDF file
+      //StorageFile pdfFile = await StorageFile.GetFileFromPathAsync(pdfPath);
+
+      //using (IRandomAccessStream pdfStream = await pdfFile.OpenAsync(FileAccessMode.Read))
+      //{
+      //   // Load the PDF document
+      //   _PdfDocument = await PdfDocument.LoadFromStreamAsync(pdfStream);
+      //}
+   }
+
+
+   public void UnloadPDF()
+   {
+      //if (_PdfDocument != null)
+      //{
+      //   _PdfDocument = null;
+      //   _PDFInfos = new PDFInfos();
+      //}
+
+      ClearPages();
+   }
+
    private async Task<PDFInfos> NewPDFInfos(string pdfPath, string url)
    {
       _PDFInfos = new PDFInfos()
@@ -24,22 +50,6 @@ partial class PdfView
       return _PDFInfos;
    }
 
-
-   void LoadPDF(string pdfPath)
-   {
-      if (_PdfDocument != null)
-      {
-         UnloadPDF();
-      }
-   }
-
-
-   void UnloadPDF()
-   {
-      if (_PdfDocument != null)
-      {
-      }
-   }
 
    public async System.Threading.Tasks.Task SavePageAsImageAsync(string outputImagePath, uint pageNumber = 0)
    {

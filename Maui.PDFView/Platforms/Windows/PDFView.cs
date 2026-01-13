@@ -13,10 +13,7 @@ partial class PdfView
 
    public async Task LoadPDF(string pdfPath)
    {
-      if (_PdfDocument != null)
-      {
-         UnloadPDF();
-      }
+      UnloadPDF();
 
       // Open the PDF file
       StorageFile pdfFile = await StorageFile.GetFileFromPathAsync(pdfPath);
@@ -36,6 +33,8 @@ partial class PdfView
          _PdfDocument = null;
          _PDFInfos = new PDFInfos();
       }
+
+      ClearPages();
    }
 
 
@@ -69,7 +68,7 @@ partial class PdfView
    {
       if (_PdfDocument == null)
       {
-         return; 
+         return;
       }
 
       using (PdfPage page = _PdfDocument.GetPage(pageNumber))
@@ -120,6 +119,20 @@ partial class PdfView
          {
             Debug.WriteLine(ex.ToString());
          }
+      }
+   }
+
+
+   public void RenderPages()
+   {
+      if (_PdfDocument == null)
+      {
+         return;
+      }
+
+      if (Handler is IPlatformViewHandler platformHandler)
+      {
+         (platformHandler as Maui.PDFView.PdfViewHandler)?.RenderPages(_PdfDocument);
       }
    }
 }

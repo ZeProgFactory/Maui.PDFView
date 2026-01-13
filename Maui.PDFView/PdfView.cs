@@ -108,6 +108,10 @@ public partial class PdfView : View, IPdfView
 
       IsBusy = true;
 
+      UnloadPDF();
+
+      // - - - Load PDF File - - -
+
       _PDFInfos = new PDFInfos();
       _PDFInfos.FileName = await pdfSource.LoadPDF(url);
 
@@ -121,6 +125,8 @@ public partial class PdfView : View, IPdfView
       {
          _PDFInfos = new PDFInfos();
       }
+
+      // - - -  - - -
 
       IsBusy = false;
 
@@ -137,11 +143,11 @@ public partial class PdfView : View, IPdfView
       await SavePageAsImageAsync(outputImagePath, 0);
    }
 
-   public void RenderPages()
+   public void ClearPages()
    {
-      if (Handler is IPlatformViewHandler platformHandler) 
-      { 
-         (platformHandler as Maui.PDFView.PdfViewHandler)?.RenderAllPages(); 
+      if (Handler is IPlatformViewHandler platformHandler)
+      {
+         (platformHandler as Maui.PDFView.PdfViewHandler)?.ClearPages();
       }
    }
 }
