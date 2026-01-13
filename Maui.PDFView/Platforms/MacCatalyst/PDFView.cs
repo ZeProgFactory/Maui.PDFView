@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using CoreGraphics;
 using Foundation;
 using ImageIO;
@@ -53,7 +54,7 @@ partial class PdfView
 
    public async System.Threading.Tasks.Task SavePageAsImageAsync(string outputImagePath, uint pageNumber = 0)
    {
-      throw new NotImplementedException();
+      Debugger.Break();
    }
 
    public async System.Threading.Tasks.Task SavePageAsImageAsync(string pdfPath, string outputImagePath, uint pageNumber = 0)
@@ -106,4 +107,17 @@ partial class PdfView
       dest.Close();
    }
 
+
+   public void RenderPages()
+   {
+      //if (_PdfDocument == null)
+      //{
+      //   return;
+      //}
+
+      //if (Handler is IPlatformViewHandler platformHandler)
+      //{
+      //   (platformHandler as Maui.PDFView.PdfViewHandler)?.RenderPages(_PdfDocument);
+      //}
+   }
 }
