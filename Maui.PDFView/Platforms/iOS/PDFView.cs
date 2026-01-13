@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace Maui.PDFView;
@@ -49,7 +50,20 @@ partial class PdfView
 
    public async System.Threading.Tasks.Task SavePageAsImageAsync(string outputImagePath, uint pageNumber = 0)
    {
-      throw new NotImplementedException();
+      Debugger.Break();
    }
 
+
+   public void RenderPages()
+   {
+      //if (_PdfDocument == null)
+      //{
+      //   return;
+      //}
+
+      //if (Handler is IPlatformViewHandler platformHandler)
+      //{
+      //   (platformHandler as Maui.PDFView.PdfViewHandler)?.RenderPages(_PdfDocument);
+      //}
+   }
 }
