@@ -5,7 +5,8 @@ using Microsoft.Maui.Handlers;
 using PdfKit;
 using UIKit;
 
-namespace Maui.PDFView.Platforms.MacCatalyst;
+namespace Maui.PDFView;
+
 
 public class PdfViewHandler : ViewHandler<IPdfView, PdfKit.PdfView>
 {
@@ -188,4 +189,9 @@ public class PdfViewHandler : ViewHandler<IPdfView, PdfKit.PdfView>
             page.SetBoundsForBox(new CoreGraphics.CGRect(cropBounds.Left, cropBounds.Top, oldBounds.Width - boundW, oldBounds.Height - boundH), boxType);
         }
     }
+
+   public void RenderAllPages()
+   {
+
+   }
 }

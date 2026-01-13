@@ -139,6 +139,9 @@ public partial class PdfView : View, IPdfView
 
    public void RenderPages()
    {
-      // PlatformRenderPages();
+      if (Handler is IPlatformViewHandler platformHandler) 
+      { 
+         (platformHandler as Maui.PDFView.PdfViewHandler)?.RenderAllPages(); 
+      }
    }
 }

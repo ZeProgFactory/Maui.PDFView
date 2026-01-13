@@ -7,13 +7,13 @@
             builder.ConfigureMauiHandlers((handlers) =>
             {
 #if ANDROID
-                handlers.AddHandler(typeof(PdfView), typeof(Platforms.Android.PdfViewHandler));
+                handlers.AddHandler(typeof(PdfView), typeof(PdfViewHandler));
 #elif IOS
-                handlers.AddHandler(typeof(PdfView), typeof(Platforms.iOS.PdfViewHandler));
+                handlers.AddHandler(typeof(PdfView), typeof(PdfViewHandler));
 #elif MACCATALYST
-                handlers.AddHandler(typeof(PdfView), typeof(Platforms.MacCatalyst.PdfViewHandler));
+                handlers.AddHandler(typeof(PdfView), typeof(PdfViewHandler));
 #elif WINDOWS
-                handlers.AddHandler(typeof(PdfView), typeof(Platforms.Windows.PdfViewHandler));
+                handlers.AddHandler(typeof(PdfView), typeof(PdfViewHandler));
 #endif
             });
 

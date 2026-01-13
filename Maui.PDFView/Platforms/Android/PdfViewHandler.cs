@@ -8,8 +8,9 @@ using Android.Widget;
 using Android.Views;
 using Maui.PDFView.Events;
 using Maui.PDFView.Helpers;
+using Maui.PDFView.Platforms.Android;
 
-namespace Maui.PDFView.Platforms.Android;
+namespace Maui.PDFView;
 
 //ToDo: ??? partial class
 public class PdfViewHandler : ViewHandler<IPdfView, FrameLayout>
@@ -261,5 +262,13 @@ public class PdfViewHandler : ViewHandler<IPdfView, FrameLayout>
                 // Execute the command if available
                 _handler.VirtualView.PageChangedCommand?.Execute(new PageChangedEventArgs(currentPage + 1, layoutManager.ItemCount));
         }
+
+
     }
+
+
+   public void RenderAllPages()
+   {
+
+   }
 }
