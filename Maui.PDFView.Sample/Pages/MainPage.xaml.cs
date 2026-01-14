@@ -42,14 +42,18 @@ public partial class MainPage : ContentPage
    {
       var tmpFile = System.IO.Path.GetTempFileName();
       await pdfView.SaveFirstPageAsImageAsync(tmpFile);
+
       imageCover.Source = tmpFile;
+      imagePreview.Source = tmpFile;
    }
 
 
    private void Unload_Clicked(object sender, EventArgs e)
    {
       pdfView.UnloadPDF();
+
       imageCover.Source = null;
+      imagePreview.Source = null;
    }
 
 

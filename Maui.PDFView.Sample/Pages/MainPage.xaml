@@ -30,6 +30,8 @@
 
       <pdf:PdfView x:Name="pdfView" Grid.Column="1" Margin="5"
             Background="Beige" />
+      <Image x:Name="imagePreview" Grid.Column="1" Margin="5"
+            BackgroundColor="Gray" />
 
 
       <Image x:Name="imageCover" Grid.Column="0" Margin="10" BackgroundColor="Gray" VerticalOptions="End"   WidthRequest="150" />

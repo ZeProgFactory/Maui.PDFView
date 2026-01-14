@@ -18,32 +18,33 @@ partial class PdfView
       UnloadPDF();
 
       // Open the PDF file
-      //StorageFile pdfFile = await StorageFile.GetFileFromPathAsync(pdfPath);
-
-      //using (IRandomAccessStream pdfStream = await pdfFile.OpenAsync(FileAccessMode.Read))
-      //{
-      //   // Load the PDF document
-      //   _PdfDocument = await PdfDocument.LoadFromStreamAsync(pdfStream);
-      //}
+      _PdfDocument = new PdfDocument(NSUrl.FromFilename(pdfPath));
    }
 
 
    public void UnloadPDF()
    {
-      //if (_PdfDocument != null)
-      //{
-      //   _PdfDocument = null;
-      //   _PDFInfos = new PDFInfos();
-      //}
+      if (_PdfDocument != null)
+      {
+         _PdfDocument = null;
+         _PDFInfos = new PDFInfos();
+      }
 
       ClearPages();
    }
 
    private async Task<PDFInfos> NewPDFInfos(string pdfPath, string url)
    {
+      if (_PdfDocument == null)
+      {
+         await LoadPDF(pdfPath);
+      }
+
+      //_PdfDocument.Description;
+
       _PDFInfos = new PDFInfos()
       {
-         //               PageCount = ,
+         PageCount = (int)_PdfDocument.PageCount,
          FileName = url,
          FileSizeInBytes = new System.IO.FileInfo(pdfPath).Length,
       };
@@ -54,56 +55,83 @@ partial class PdfView
 
    public async System.Threading.Tasks.Task SavePageAsImageAsync(string outputImagePath, uint pageNumber = 0)
    {
-      Debugger.Break();
-   }
+      if (_PdfDocument == null)
+      {
+         // ("No PDF loaded.");
+         return;
+      }
 
-   public async System.Threading.Tasks.Task SavePageAsImageAsync(string pdfPath, string outputImagePath, uint pageNumber = 0)
-   {
-      if (!File.Exists(pdfPath))
-         throw new FileNotFoundException("PDF not found", pdfPath);
-
-      // Load PDF
-      var pdfDoc = new PdfDocument(NSUrl.FromFilename(pdfPath));
-
-      if (pdfDoc.PageCount == 0)
+      if (_PdfDocument.PageCount == 0)
          throw new InvalidOperationException("PDF has no pages.");
 
+      // Get page
+      var page = _PdfDocument.GetPage((nint)pageNumber);
+      var bounds = page.GetBoundsForBox(PdfDisplayBox.Media);
 
-      // Get first page
-      var page = pdfDoc.GetPage((nint)pageNumber);
-
-      var pageBounds = page.GetBoundsForBox(PdfDisplayBox.Media);
-
-      // Create bitmap context
-      int width = (int)pageBounds.Width;
-      int height = (int)pageBounds.Height;
+      int width = (int)bounds.Width;
+      int height = (int)bounds.Height;
 
       using var colorSpace = CGColorSpace.CreateDeviceRGB();
       using var context = new CGBitmapContext(
-          data: IntPtr.Zero,
-          width: width,
-          height: height,
-          bitsPerComponent: 8,
-          bytesPerRow: width * 4,
-          colorSpace: colorSpace,
-          bitmapInfo: CGImageAlphaInfo.PremultipliedLast
+          IntPtr.Zero,
+          width,
+          height,
+          8,
+          width * 4,
+          colorSpace,
+          CGImageAlphaInfo.PremultipliedLast
       );
 
-      // Flip coordinate system (PDFKit uses bottom-left origin)
+      // White background
+      context.SetFillColor(1, 1, 1, 1);
+      context.FillRect(new CGRect(0, 0, width, height));
+
+      // Flip coordinate system for PDF drawing
       context.TranslateCTM(0, height);
       context.ScaleCTM(1, -1);
 
-      // Draw the PDF page
+      // Apply PDF page rotation
+      int rotation = (int)page.Rotation;
+      if (rotation != 0)
+      {
+         context.TranslateCTM(width / 2f, height / 2f);
+         context.RotateCTM((float)(rotation * Math.PI / 180));
+         context.TranslateCTM(-width / 2f, -height / 2f);
+      }
+
+      // Draw PDF page
       page.Draw(PdfDisplayBox.Media, context);
 
-      // Create CGImage
+      // Create CGImage from the (flipped) context
       using var cgImage = context.ToImage();
 
-      // Encode PNG using ImageIO
+      // ⭐ Flip the final CGImage so the PNG is upright
+      using var finalContext = new CGBitmapContext(
+          IntPtr.Zero,
+          width,
+          height,
+          8,
+          width * 4,
+          colorSpace,
+          CGImageAlphaInfo.PremultipliedLast
+      );
+
+      finalContext.SetFillColor(1, 1, 1, 1);
+      finalContext.FillRect(new CGRect(0, 0, width, height));
+
+      // Flip vertically
+      finalContext.TranslateCTM(0, height);
+      finalContext.ScaleCTM(1, -1);
+
+      finalContext.DrawImage(new CGRect(0, 0, width, height), cgImage);
+
+      using var finalImage = finalContext.ToImage();
+
+      // Save PNG
       using var url = NSUrl.FromFilename(outputImagePath);
       using var dest = CGImageDestination.Create(url, UTType.PNG, 1);
 
-      dest.AddImage(cgImage);
+      dest.AddImage(finalImage);
       dest.Close();
    }
 
