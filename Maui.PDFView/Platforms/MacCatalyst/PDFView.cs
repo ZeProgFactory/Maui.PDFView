@@ -55,6 +55,8 @@ partial class PdfView
 
    public async System.Threading.Tasks.Task SavePageAsImageAsync(string outputImagePath, uint pageNumber = 0)
    {
+      float scale = 2.0f; // ⭐ scale factor: 1 = native, 2 = 2×, 3 = 3×, etc.
+
       if (_PdfDocument == null)
       {
          // ("No PDF loaded.");
@@ -68,8 +70,8 @@ partial class PdfView
       var page = _PdfDocument.GetPage((nint)pageNumber);
       var bounds = page.GetBoundsForBox(PdfDisplayBox.Media);
 
-      int width = (int)bounds.Width;
-      int height = (int)bounds.Height;
+      int width = (int)(bounds.Width * scale);
+      int height = (int)(bounds.Height * scale);
 
       using var colorSpace = CGColorSpace.CreateDeviceRGB();
       using var context = new CGBitmapContext(
@@ -89,6 +91,9 @@ partial class PdfView
       // Flip coordinate system for PDF drawing
       context.TranslateCTM(0, height);
       context.ScaleCTM(1, -1);
+
+      // Apply scale factor to PDF content
+      context.ScaleCTM(scale, scale);
 
       // Apply PDF page rotation
       int rotation = (int)page.Rotation;
